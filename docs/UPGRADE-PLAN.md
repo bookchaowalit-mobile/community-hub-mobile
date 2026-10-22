@@ -39,3 +39,15 @@ Score: 7.5/10 (was 7/10) — edge-case hunt in `lib/community.ts`.
 - Bug: title length counted UTF-16 units, so "👍👍👍" passed the 5-character minimum (and invisible characters counted too).
 - Search is NFKC-normalised.
 - Verified: typecheck, lint, 22 vitest tests, Android `expo export`.
+
+## Done in this pass (2026-10-22, Big Loop: canonical template to L2)
+
+- CI moved to the shared `bookchaowalit/platform-ci-workflows` v1.1.1 (`ci-node.yml` +
+  `security.yml`, SHA-pinned) in `.github/workflows/ci.yml`; the EAS job was removed
+  (owner action: `eas init` + Expo account). Coverage gate: lines >= 47% over all of
+  `app/` and `lib/` (measured 47.72%; ratchet up when component tests land).
+- vitest 3.2 -> 4.1.12 to fix GHSA-82fw-gwwq-j7x9 / GHSA-qxg6-89mg-rqv8 and the tinypool
+  advisories. Remaining advisories are inside Expo SDK 53 / RN 0.79 tooling and are
+  listed with reasons and a 2027-01-22 expiry in `osv-scanner.toml` and `.trivyignore`.
+- P1: upgrading to a newer Expo SDK (metro with image-size 2.x, query-string 9) clears most
+  of those exceptions.
